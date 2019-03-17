@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { sendSofDetailsRequest } from './actions';
 import AppHeader from '../../components/AppHeader';
 import SummeryChart from '../../components/SummeryChart';
+import SummeryTable from '../../components/SummeryTable';
 
 class MainPage extends React.PureComponent {
   componentDidMount() {
@@ -13,7 +14,13 @@ class MainPage extends React.PureComponent {
   }
 
   render() {
-    const { summeryData, viewSettings, periodInfo, loading } = this.props;
+    const {
+      summeryData,
+      summeryRowsTable,
+      viewSettings,
+      periodInfo,
+      loading,
+    } = this.props;
 
     let chartViewSettings = viewSettings;
 
@@ -31,6 +38,13 @@ class MainPage extends React.PureComponent {
           periodInfo={periodInfo}
           loading={loading}
         />
+        {!loading &&
+          Object.keys(chartViewSettings).length > 0 && (
+          <SummeryTable
+            summeryRowsTable={summeryRowsTable}
+            chartViewSettings={chartViewSettings}
+          />
+        )}
       </React.Fragment>
     );
   }
@@ -39,6 +53,7 @@ class MainPage extends React.PureComponent {
 const mapStateToProps = state => ({
   loading: state.globalReducer.loading,
   summeryData: state.mainPageReducer.summeryData,
+  summeryRowsTable: state.mainPageReducer.summeryRowsTable,
   viewSettings: state.mainPageReducer.viewSettings,
   periodInfo: state.mainPageReducer.periodInfo,
 });
@@ -52,6 +67,8 @@ MainPage.propTypes = {
   summeryData: PropTypes.object.isRequired,
   periodInfo: PropTypes.object.isRequired,
   viewSettings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
+    .isRequired,
+  summeryRowsTable: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
     .isRequired,
 };
 
