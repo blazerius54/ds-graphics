@@ -7,8 +7,9 @@ export const summeryRequest = () => ({
   type: SUMMURY_REQUEST,
 });
 
-export const summerySuccess = () => ({
+export const summerySuccess = summeryData => ({
   type: SUMMURY_SUCCESS,
+  summeryData,
 });
 
 export const summeryError = () => ({
