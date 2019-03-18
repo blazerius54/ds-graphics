@@ -7,7 +7,7 @@ import AppHeader from '../../components/AppHeader';
 import SummeryChart from '../../components/SummeryChart';
 import SummeryTable from '../../components/SummeryTable';
 
-class MainPage extends React.PureComponent {
+class SummeryPage extends React.PureComponent {
   componentDidMount() {
     // Request summary data for chart
     this.props.sendSofDetailsRequest();
@@ -61,7 +61,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ sendSofDetailsRequest }, dispatch);
 
-MainPage.propTypes = {
+SummeryPage.propTypes = {
   sendSofDetailsRequest: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   summeryData: PropTypes.object.isRequired,
@@ -75,4 +75,4 @@ MainPage.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MainPage);
+)(SummeryPage);

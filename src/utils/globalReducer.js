@@ -2,7 +2,7 @@ import {
   SUMMURY_REQUEST,
   SUMMURY_SUCCESS,
   SUMMURY_ERROR,
-} from '../containers/MainPage/consts';
+} from '../containers/SummeryPage/consts';
 
 export const initialState = {
   loading: false,
