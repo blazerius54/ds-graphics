@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { sendSofDetailsRequest } from './actions';
-import AppHeader from '../../components/AppHeader';
 import SummeryChart from '../../components/SummeryChart';
 import SummeryTable from '../../components/SummeryTable';
 
@@ -32,7 +31,6 @@ class SummeryPage extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <AppHeader />
         <SummeryChart
           chartViewSettings={chartViewSettings}
           periodInfo={periodInfo}

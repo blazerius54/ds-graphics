@@ -30,7 +30,6 @@ class SummeryChart extends React.PureComponent {
         {Object.keys(chartViewSettings).length > 0 && (
           <React.Fragment>
             <SummeryHeader>
-              <h3>Summery data</h3>
               <SummeryPeriod>
                 <p>From {this.dateFormat(periodInfo.firstDate)}.</p>
                 <p>To: {this.dateFormat(periodInfo.lastDate)}.</p>
