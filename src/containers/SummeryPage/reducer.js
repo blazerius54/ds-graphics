@@ -1,21 +1,19 @@
-import { SUMMURY_REQUEST, SUMMURY_SUCCESS, SUMMURY_ERROR } from './consts';
+import { SUMMARY_SUCCESS } from './consts';
 
 export const initialState = {
-  summeryData: {},
-  summeryRowsTable: [],
-  viewSettings: {},
+  summeryRowsTable: {},
+  viewSettings: '',
   periodInfo: {
     firstDate: '',
     lastDate: '',
   },
 };
 
-function mainPageReducer(state = initialState, action) {
+function summeryPageReducer(state = initialState, action) {
   switch (action.type) {
-    case SUMMURY_SUCCESS:
+    case SUMMARY_SUCCESS:
       return {
         ...state,
-        summeryData: action.summeryData,
         summeryRowsTable: action.summeryData.rows,
         viewSettings: action.summeryData.viewSettings.plots[0].legends,
         periodInfo: {
@@ -28,4 +26,4 @@ function mainPageReducer(state = initialState, action) {
   }
 }
 
-export default mainPageReducer;
+export default summeryPageReducer;

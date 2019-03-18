@@ -1,40 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell } from 'recharts';
-import GlobalLoader from '../GlobalLoader';
-import {
-  SummeryWrapper,
-  SummeryChartWrapper,
-  SummeryHeader,
-  SummeryPeriod,
-} from './styled';
+import { ChartHeader, ChartWrapper } from '../CommonStyled';
+import { SummeryChartWrapper } from './styled';
+import TimeWrapper from '../TimeWrapper';
 
 class SummeryChart extends React.PureComponent {
-  dateFormat(date) {
-    const fullDate = new Date(date);
-    return `${fullDate.getDate()}.${fullDate.getMonth() +
-      1}.${fullDate.getFullYear()}`;
-  }
-
   render() {
-    const {
-      summeryData,
-      viewSettings,
-      chartViewSettings,
-      periodInfo,
-      loading,
-    } = this.props;
+    const { chartViewSettings, periodInfo } = this.props;
 
     return (
-      <SummeryWrapper>
+      <ChartWrapper>
         {Object.keys(chartViewSettings).length > 0 && (
           <React.Fragment>
-            <SummeryHeader>
-              <SummeryPeriod>
-                <p>From {this.dateFormat(periodInfo.firstDate)}.</p>
-                <p>To: {this.dateFormat(periodInfo.lastDate)}.</p>
-              </SummeryPeriod>
-            </SummeryHeader>
+            <ChartHeader>
+              <TimeWrapper
+                firstDate={periodInfo.firstDate}
+                lastDate={periodInfo.lastDate}
+              />
+            </ChartHeader>
             <SummeryChartWrapper>
               <BarChart
                 width={500}
@@ -60,8 +44,7 @@ class SummeryChart extends React.PureComponent {
             </SummeryChartWrapper>
           </React.Fragment>
         )}
-        {loading && <GlobalLoader />}
-      </SummeryWrapper>
+      </ChartWrapper>
     );
   }
 }
@@ -69,7 +52,7 @@ class SummeryChart extends React.PureComponent {
 SummeryChart.propTypes = {
   chartViewSettings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
     .isRequired,
-  loading: PropTypes.bool.isRequired,
+  periodInfo: PropTypes.object.isRequired,
 };
 
 export default SummeryChart;

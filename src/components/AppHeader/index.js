@@ -8,11 +8,11 @@ const AppHeader = () => (
       <h2>Fetch your data!</h2>
     </AppTitle>
     <HeaderNav>
-      <Link to='/'>
+      <Link to="/">
         <h3>Summery data</h3>
       </Link>
-      <Link to='/card'>
-        <h3>Card info</h3>
+      <Link to="/card">
+        <h3>Card data</h3>
       </Link>
     </HeaderNav>
   </MainHeaderWrapper>

@@ -2,42 +2,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { sendCardRequest } from './actions';
+import CardChart from '../../components/CardChart';
+import GlobalLoader from '../../components/GlobalLoader';
 
 class CardReport extends React.PureComponent {
+  componentDidMount() {
+    this.props.sendCardRequest();
+  }
+
   render() {
+    const { cardData, cardTime, loading } = this.props;
+    let pieChartCardData = [];
+    const isCardData = cardData.length > 0;
+    if (isCardData) {
+      pieChartCardData = cardData.map(item => ({
+        name: item.name,
+        value: Number((Math.random() * 1000).toFixed(0)),
+      }));
+    }
+
     return (
       <React.Fragment>
-        report card
+        {isCardData && (
+          <CardChart cardTime={cardTime} pieChartCardData={pieChartCardData} />
+        )}
+        {loading && <GlobalLoader />}
       </React.Fragment>
     );
   }
 }
 
-// const mapStateToProps = state => ({
-//   loading: state.globalReducer.loading,
-//   summeryData: state.mainPageReducer.summeryData,
-//   summeryRowsTable: state.mainPageReducer.summeryRowsTable,
-//   viewSettings: state.mainPageReducer.viewSettings,
-//   periodInfo: state.mainPageReducer.periodInfo,
-// });
-//
-// const mapDispatchToProps = dispatch =>
-//   bindActionCreators({ sendSofDetailsRequest }, dispatch);
-//
-// CardReport.propTypes = {
-//   sendSofDetailsRequest: PropTypes.func.isRequired,
-//   loading: PropTypes.bool.isRequired,
-//   summeryData: PropTypes.object.isRequired,
-//   periodInfo: PropTypes.object.isRequired,
-//   viewSettings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-//     .isRequired,
-//   summeryRowsTable: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-//     .isRequired,
-// };
-//
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(CardReport);
+const mapStateToProps = state => ({
+  loading: state.globalReducer.loading,
+  cardData: state.cardPageReducer.cardData,
+  cardTime: state.cardPageReducer.cardTime,
+});
 
-export default CardReport;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ sendCardRequest }, dispatch);
+
+CardReport.propTypes = {
+  sendCardRequest: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  cardData: PropTypes.array.isRequired,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CardReport);

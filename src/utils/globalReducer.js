@@ -1,8 +1,13 @@
 import {
-  SUMMURY_REQUEST,
-  SUMMURY_SUCCESS,
-  SUMMURY_ERROR,
+  SUMMARY_REQUEST,
+  SUMMARY_SUCCESS,
+  SUMMARY_ERROR,
 } from '../containers/SummeryPage/consts';
+import {
+  CARD_REQUEST,
+  CARD_SUCCESS,
+  CARD_ERROR,
+} from '../containers/CardReport/consts';
 
 export const initialState = {
   loading: false,
@@ -10,13 +15,16 @@ export const initialState = {
 
 function globalReducer(state = initialState, action) {
   switch (action.type) {
-    case SUMMURY_REQUEST:
+    case SUMMARY_REQUEST:
+    case CARD_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case SUMMURY_SUCCESS:
-    case SUMMURY_ERROR:
+    case SUMMARY_SUCCESS:
+    case CARD_SUCCESS:
+    case SUMMARY_ERROR:
+    case CARD_ERROR:
       return {
         ...state,
         loading: false,

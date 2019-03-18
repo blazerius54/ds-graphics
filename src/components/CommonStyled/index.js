@@ -9,3 +9,17 @@ export const AppContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const ChartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ChartHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    margin-bottom: 10px;
+  }
+`;

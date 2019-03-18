@@ -1,28 +1,28 @@
-import { SUMMURY_REQUEST, SUMMURY_SUCCESS, SUMMURY_ERROR } from './consts';
+import { SUMMARY_REQUEST, SUMMARY_SUCCESS, SUMMARY_ERROR } from './consts';
 import { getSummuryData } from '../../network';
 
 // Async actions
 
 export const summeryRequest = () => ({
-  type: SUMMURY_REQUEST,
+  type: SUMMARY_REQUEST,
 });
 
 export const summerySuccess = summeryData => ({
-  type: SUMMURY_SUCCESS,
+  type: SUMMARY_SUCCESS,
   summeryData,
 });
 
 export const summeryError = () => ({
-  type: SUMMURY_ERROR,
+  type: SUMMARY_ERROR,
 });
 
 // Redux-thunk
 
-export function sendSofDetailsRequest(url) {
+export function sendSummeryRequest() {
   return dispatch => {
     dispatch(summeryRequest());
 
-    getSummuryData(url)
+    getSummuryData()
       .then(response => response.json())
       .then(response => {
         dispatch(summerySuccess(response));
