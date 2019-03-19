@@ -9,8 +9,11 @@ const dateFormat = date => {
 
 const TimeWrapper = ({ firstDate, lastDate }) => (
   <div>
-    <p>From {dateFormat(firstDate)}.</p>
-    {lastDate && <p>To: {dateFormat(lastDate)}.</p>}
+    <p>
+      {lastDate && 'From '}
+      {dateFormat(firstDate)}
+    </p>
+    {lastDate && <p>To: {dateFormat(lastDate)}</p>}
   </div>
 );
 
