@@ -21,3 +21,7 @@ export const HeaderNav = styled.nav`
     color: #484499;
   }
 `;
+
+export const NavItem = styled.div`
+  color: ${props => props.active && '#8699ff'};
+`;
