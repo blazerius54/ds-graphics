@@ -9,22 +9,21 @@ import GlobalLoader from '../../components/GlobalLoader';
 
 class SummeryPage extends React.PureComponent {
   componentDidMount() {
-    // Request summary data for chart
-    this.props.sendSummeryRequest();
+    // Send summary data request if there is no data in reducer
+    const { summeryRowsTable, sendSummeryRequest } = this.props;
+    if (summeryRowsTable.length === 0) {
+      sendSummeryRequest();
+    }
   }
 
   render() {
     const { summeryRowsTable, viewSettings, periodInfo, loading } = this.props;
 
-    let isChartViewSettings = false;
-    let chartViewSettings = viewSettings;
+    const isChartViewSettings = viewSettings.length > 0;
+    let chartViewSettings = [];
 
-    if (chartViewSettings) {
-      isChartViewSettings = Object.keys(chartViewSettings).length > 0;
-    }
-
-    if (isChartViewSettings) {
-      chartViewSettings = chartViewSettings.map(item => ({
+    if (isChartViewSettings && summeryRowsTable.length !== 0) {
+      chartViewSettings = viewSettings.map(item => ({
         ...item,
         value: Math.random() * 10,
       }));
@@ -64,10 +63,8 @@ SummeryPage.propTypes = {
   sendSummeryRequest: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   periodInfo: PropTypes.object.isRequired,
-  viewSettings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    .isRequired,
-  summeryRowsTable: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    .isRequired,
+  viewSettings: PropTypes.array.isRequired,
+  summeryRowsTable: PropTypes.array.isRequired,
 };
 
 export default connect(

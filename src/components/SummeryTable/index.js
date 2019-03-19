@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DataTable } from './styled';
+import { DataTable } from '../CommonStyled';
 
 const SummeryTable = React.memo(({ summeryRowsTable, chartViewSettings }) => (
   <DataTable>
@@ -23,10 +23,8 @@ const SummeryTable = React.memo(({ summeryRowsTable, chartViewSettings }) => (
 ));
 
 SummeryTable.propTypes = {
-  summeryRowsTable: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    .isRequired,
-  chartViewSettings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    .isRequired,
+  summeryRowsTable: PropTypes.array.isRequired,
+  chartViewSettings: PropTypes.array.isRequired,
 };
 
 export default SummeryTable;

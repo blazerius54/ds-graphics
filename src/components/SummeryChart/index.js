@@ -50,8 +50,7 @@ class SummeryChart extends React.PureComponent {
 }
 
 SummeryChart.propTypes = {
-  chartViewSettings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    .isRequired,
+  chartViewSettings: PropTypes.array.isRequired,
   periodInfo: PropTypes.object.isRequired,
 };
 

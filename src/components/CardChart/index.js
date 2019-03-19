@@ -10,9 +10,7 @@ class CardChart extends React.PureComponent {
     return (
       <ChartWrapper>
         <ChartHeader>
-          <TimeWrapper
-            firstDate={cardTime}
-          />
+          <TimeWrapper firstDate={cardTime} />
         </ChartHeader>
         <PieChart width={400} height={400}>
           <Pie
@@ -33,9 +31,8 @@ class CardChart extends React.PureComponent {
 }
 
 CardChart.propTypes = {
-  pieChartCardData: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    .isRequired,
-  // loading: PropTypes.bool.isRequired,
+  pieChartCardData: PropTypes.array.isRequired,
+  cardTime: PropTypes.string.isRequired,
 };
 
 export default CardChart;

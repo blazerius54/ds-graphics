@@ -5,16 +5,24 @@ import { bindActionCreators } from 'redux';
 import { sendCardRequest } from './actions';
 import CardChart from '../../components/CardChart';
 import GlobalLoader from '../../components/GlobalLoader';
+import PieTable from '../../components/PieTable';
 
 class CardReport extends React.PureComponent {
   componentDidMount() {
-    this.props.sendCardRequest();
+    const { cardData, sendCardRequest } = this.props;
+
+    // Send request if there is no data in reducer
+
+    if (cardData.length === 0) {
+      sendCardRequest();
+    }
   }
 
   render() {
     const { cardData, cardTime, loading } = this.props;
-    let pieChartCardData = [];
     const isCardData = cardData.length > 0;
+    let pieChartCardData = [];
+
     if (isCardData) {
       pieChartCardData = cardData.map(item => ({
         name: item.name,
@@ -24,8 +32,15 @@ class CardReport extends React.PureComponent {
 
     return (
       <React.Fragment>
-        {isCardData && (
-          <CardChart cardTime={cardTime} pieChartCardData={pieChartCardData} />
+        {!loading &&
+          isCardData && (
+          <React.Fragment>
+            <CardChart
+              cardTime={cardTime}
+              pieChartCardData={pieChartCardData}
+            />
+            <PieTable pieChartCardData={pieChartCardData} />
+          </React.Fragment>
         )}
         {loading && <GlobalLoader />}
       </React.Fragment>
@@ -46,6 +61,7 @@ CardReport.propTypes = {
   sendCardRequest: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   cardData: PropTypes.array.isRequired,
+  cardTime: PropTypes.string.isRequired,
 };
 
 export default connect(

@@ -1,8 +1,8 @@
 import { SUMMARY_SUCCESS } from './consts';
 
 export const initialState = {
-  summeryRowsTable: {},
-  viewSettings: '',
+  summeryRowsTable: [],
+  viewSettings: [],
   periodInfo: {
     firstDate: '',
     lastDate: '',
